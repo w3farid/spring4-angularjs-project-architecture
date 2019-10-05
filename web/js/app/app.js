@@ -31,6 +31,11 @@
                 templateUrl: 'views/users.html',
                 controllerAs: 'vm'
             })
+            .when('/project', {
+                controller: 'ProjectController',
+                templateUrl: 'views/project.html',
+                controllerAs: 'vm'
+            })
 
             .otherwise({ redirectTo: '/login' });
     }

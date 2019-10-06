@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/src/java/com/exam/dao/UserDaoImpl.java</file>
-            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/src/java/com/exam/service/UserServiceImpl.java</file>
-            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/src/java/com/exam/model/User.java</file>
-            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/web/WEB-INF/dispatcher-servlet.xml</file>
-            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/web/js/controller/controller.js</file>
+            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/web/views/issue.html</file>
+            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/src/java/com/exam/controller/ITProjectController.java</file>
+            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/web/js/app/app.js</file>
+            <file>file:/home/farid/NetBeansProjects/Spring4AngularJsProjectStructure/src/java/com/exam/model/ITIssue.java</file>
         </group>
     </open-files>
 </project-private>

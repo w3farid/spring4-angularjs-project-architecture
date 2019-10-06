@@ -8,6 +8,7 @@ package com.exam.controller;
 import com.exam.model.ItProject;
 import com.exam.model.User;
 import com.exam.service.ITProjectService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,10 @@ public class ITProjectController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ItProject saveProject(@RequestBody ItProject itProject){
         return iTProjectService.saveProject(itProject);
+    }
+    
+    @RequestMapping(value = "/showAll", method = RequestMethod.GET)
+    public List<ItProject> showAll(){
+        return iTProjectService.getAll();
     }
 }

@@ -30,7 +30,7 @@ public class ITProjectServiceImpl implements ITProjectService{
 
     @Override
     public List<ItProject> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return iTProjectDao.getAll();
     }
 
     @Override

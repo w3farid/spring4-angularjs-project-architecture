@@ -1,0 +1,43 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Create Issue</h2>
+    <form name="form" ng-submit="createIssue()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.issueSummery.$dirty && form.issueSummery.$error.required }">
+            <label for="issueSummery">Issue Summery</label>
+            <textarea class="form-control" 
+                      id="issueSummery"
+                      name="issueSummery"
+                      ng-model="issue.issueSummery" required></textarea>
+            <span ng-show="form.issueSummery.$dirty && form.issueSummery.$error.required" class="help-block">Issue summery is required</span>
+        </div>
+        
+        <div class="form-group" ng-class="{ 'has-error': form.issueDescription.$dirty && form.issueDescription.$error.required }">
+            <label for="issueDescription">Issue Description</label>
+            <textarea class="form-control" 
+                      id="issueDescription"
+                      name="issueDescription"
+                      ng-model="issue.issueDescription" required></textarea>
+            <span ng-show="form.issueDescription.$dirty && form.issueDescription.$error.required" class="help-block">Issue summery is required</span>
+        </div>
+        
+        <div class="form-group" ng-class="{ 'has-error': form.assignedToUserId.$dirty && form.assignedToUserId.$error.required }">
+            <label for="assignedToUserId">Issue Assignee</label>
+            <select ng-model="issue.assignedToUserId.id" class="form-control">
+                <option ng-repeat="user in users" value="{{user.id}}">{{user.username}}</option>
+            </select>
+            <span ng-show="form.assignedToUserId.$dirty && form.assignedToUserId.$error.required" class="help-block">Assignee is required</span>
+        </div>
+        
+        <div class="form-group" ng-class="{ 'has-error': form.project.$dirty && form.identifiedByUserId.$error.required }">
+            <label for="project">Select project</label>
+            <select ng-model="issue.project.id" class="form-control">
+                <option ng-repeat="project in projects" value="{{project.projectId}}">{{project.projectName}}</option>
+            </select>
+            <span ng-show="form.project.$dirty && form.project.$error.required" class="help-block">Project is required</span>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Save</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+    </form>
+</div>

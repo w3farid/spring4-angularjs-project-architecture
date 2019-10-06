@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAll() {
         List<User> userList = (List<User>) sessionFactory.getCurrentSession()
-                .createQuery("From ITPeople").list();
+                .createQuery("From User").list();
         return userList;
 
     }

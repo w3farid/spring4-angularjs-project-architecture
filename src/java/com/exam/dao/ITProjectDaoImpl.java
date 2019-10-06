@@ -30,7 +30,9 @@ public class ITProjectDaoImpl implements ITProjectDao {
 
     @Override
     public List<ItProject> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ItProject> projectList = sessionFactory.getCurrentSession()
+                .createQuery("FROM ItProject").list();
+        return projectList;
     }
 
     @Override

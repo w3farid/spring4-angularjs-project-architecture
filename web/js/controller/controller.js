@@ -42,6 +42,38 @@ app.controller('ProjectController', function ($scope, $location, $http, $rootSco
 
 });
 
+app.controller('IssueController', function ($scope, $location, $http, $rootScope, LoginService) {
+   $scope.users = [];
+   $scope.projects = [];
+   getInitUsers();
+   getInitProjects();
+   
+   function getInitUsers(){
+       
+      $http.get('/api/users/showAll')
+           .then(function(res){
+           $scope.users = res.data;
+   }).catch(function(err){
+       console.log(err);
+   });
+   };
+   
+   function getInitProjects(){
+       
+      $http.get('/api/projects/showAll')
+           .then(function(res){
+           $scope.projects = res.data;
+   }).catch(function(err){
+       console.log(err);
+   });
+   };
+   
+    $scope.createIssue = function () {
+        console.log(this.issue);
+    };
+
+});
+
 function getAllUsers(UserService, $scope) {
     UserService.GetAll()
             .then(function (res) {

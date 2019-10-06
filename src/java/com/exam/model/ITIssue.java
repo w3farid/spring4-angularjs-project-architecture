@@ -6,7 +6,7 @@
 package com.exam.model;
 
 import java.util.Date;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +28,7 @@ public class ITIssue {
     private int issueId;
     String issueSummery;
     String issueDescription;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identifiedByUserId")
     User identifiedByUserId;
 
@@ -37,11 +37,11 @@ public class ITIssue {
     @Temporal(TemporalType.TIMESTAMP)
     Date relatedDate;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "relatedProjectId")
     ItProject project;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "assignedToUserId")
     User assignedToUserId;
     

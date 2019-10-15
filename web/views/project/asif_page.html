@@ -1,0 +1,28 @@
+<div class="col-md-12">
+    <h2>Project And Issue Details</h2>
+    <form name="form"  role="form">
+
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <select ng-model="projectName" >
+                <option ng-value="item" ng-repeat="item in project">{{item.p1}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Project Name</h3><br>
+                <p>{{projectName.p1}}</p>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Project Name</h3><br>
+                <p>{{projectName.p2}}</p>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Action</h3><br>
+                <input type="button" value="Review" ng-click="review()"/>
+            </div>
+        </div>
+
+    </form>
+</div>

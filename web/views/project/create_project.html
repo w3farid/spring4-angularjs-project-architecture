@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-5 ">
+        <h2 style="color: green">Create Project Form</h2>
+        <form name="project" role="form">
+            <div class="form-group">
+                <label for="pName">Project Name</label>
+                <input type="text" name="pName" id="pName" class="form-control" ng-model="project.name" required />
+                <span ng-show="project.pName.$dirty && project.pName.$error.required" class="help-block">Project Name is required</span>
+            </div>
+            <div class="form-group">
+                <label for="pDes">Project Description</label>
+                <textarea  name="pDes" id="pDes" class="form-control" ng-model="project.description" required ></textarea>
+                <span ng-show="project.pDes.$dirty && project.pDes.$error.required" class="help-block">Description is required</span>
+            </div>
+            <div class="form-group">
+                <label for="psDate">Project Start Date</label>
+                <input type="Date" name="psDate" class="form-control" ng-model="project.pstartDate" />
+            </div>
+            <div class="form-group">
+                <label for="peDate">Project End Date</label>
+                <input type="Date" name="peDate" class="form-control" ng-model="project.pendDate" />
+            </div>
+            <div class="form-group">
+                <label for="pStatus">Project Status</label>
+                <select name="pStatus" id="pStatus" ng-model="status" class="js-example-basic-single form-control">
+                    <option class="form-control" ng-value="Ongoing" >Ongoing</option>   
+                    <option class="form-control" ng-value="Done" >Done</option>   
+                </select>
+            </div>
+           
+            <div class="form-group">
+                <label for="mem">Add Member</label>
+                <select name="mem" id="mem" ng-change="cRow()" ng-model="addmember" class="js-example-basic-single form-control">
+                    <!--<option class="form-control" value="#">Add Member</option>-->
+                    <option class="form-control" ng-value="mem" ng-repeat="mem in member" >{{mem.username}}</option>   
+                </select>
+            </div>
+            <table class="table table-striped" id="myTable" ng-model="tmember">
+                <tr ng-if="addmember">
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Username</td>
+                    <td>Action</td>
+                </tr>
+                <tr ng-repeat="item in selectedMember">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.username}}</td>
+                    <td>
+                        <input type="button" ng-click="closeUse(item, $index)" value="Close" class="btn btn-danger" >
+                    </td>
+                </tr>
+            </table>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="project.$invalid" ng-click="createProject()" class="btn btn-success btn-block" >Create</button>
+            </div>
+        </form>
+        
+    </div>
+    
+</div>
+<script>
+    
+    
+    $( document ).ready(function() {
+        $('#mem').select2({
+            placeholder: 'Select a month'
+        });
+    });
+</script>

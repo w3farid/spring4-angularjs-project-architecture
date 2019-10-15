@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('app')
-        .controller('LoginController', LoginController);
+            .module('app')
+            .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$location', 'LoginService'];
     function LoginController($location, LoginService) {
@@ -18,15 +18,17 @@
 
         function login() {
             vm.dataLoading = true;
-            LoginService.Login(vm.username, vm.password, function (response) {                
-                if (response.success) {
-                    LoginService.SetCredentials(vm.username, vm.password);
+            LoginService.Login(vm.username, vm.password, function (response) {
+                if (response.data.outcome == 'success') {
+                    LoginService.SetCredentials(response);
                     $location.path('/');
-                } else {
+                    vm.dataLoading = false;
+                }else {
                     vm.dataLoading = false;
                 }
             });
-        };
+        }
+        ;
     }
 
 })();

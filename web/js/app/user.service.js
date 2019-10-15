@@ -9,18 +9,20 @@
 
     UserService.$inject = ['$http'];
     function UserService($http) {
+        var baseURL = 'http://olonsoft.com:8080';
         var service = {};
 
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
+        service.userLogin = userLogin;
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
 
         return service;
 
-        function GetAll() {
+        function GetAll() {            
             return $http.get('/api/users/showAll').then(handleSuccess, handleError('Error getting all users'));
         }
 
@@ -30,6 +32,10 @@
 
         function GetByUsername(username) {
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+        }
+        
+        function userLogin(username, password) {            
+            return $http.post(baseURL+'/userLogin', JSON.stringify({username:username, password:password})).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
@@ -46,13 +52,13 @@
 
         // private functions
 
-        function handleSuccess(res) {
-            return res;
+        function handleSuccess(response) {           
+            return response;
         }
 
         function handleError(error) {
             return function () {
-                return { success: false, message: error };
+                return error;
             };
         }
     }

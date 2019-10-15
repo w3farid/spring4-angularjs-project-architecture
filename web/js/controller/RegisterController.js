@@ -6,7 +6,7 @@
         .controller('RegisterController', RegisterController);
 
     RegisterController.$inject = ['UserService', '$location', '$rootScope'];
-    function RegisterController(UserService, $location, $rootScope,) {
+    function RegisterController(UserService, $location, $rootScope) {
         var vm = this;
 
         vm.register = register;

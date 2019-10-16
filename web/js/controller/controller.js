@@ -1,10 +1,8 @@
-/* global addmember, selectedMember, project */
-
 'use strict';
 var app = angular.module('app');
 
 app.controller('HomeController', function ($scope, $location, $http, $rootScope, LoginService) {
-    $rootScope.logout = function () {        
+    $rootScope.logout = function () {
         LoginService.ClearCredentials();
         $location.path('/login');
     };
@@ -31,7 +29,7 @@ app.controller('UserController', function ($scope, $location, $http, $rootScope,
 
 });
 
-app.controller('ProjectController', function ($scope, $location, $http, $rootScope, LoginService) {
+app.controller('ProjectController', function ($scope, $location, $http, $rootScope, LoginService, API) {
 
     $scope.createProject = function () {
         $http.post('/api/projects/save', JSON.stringify(this.project))
@@ -110,19 +108,23 @@ app.controller('ProjectController', function ($scope, $location, $http, $rootSco
         }
     };
 
-    $scope.project = {
-        project_name:'',
-        project_dsc: '',
-        start_date: '',
-        target_end_date: '',
-        status: '',
-        teams: $scope.selectedMember
-    };
+
 
     $scope.createProject = function () {
+        var project = {
+            project_name: this.project.name,
+            project_dsc: this.project.description,
+            start_date: this.project.pstartDate,
+            target_end_date: this.project.pendDate,
+            status: this.project.status,
+            teams: null,
+            issues: null
+        };
+        console.log(project);
+        $http.post(API.BASE_URL+API.CREATE_PROJECT, project).then(function(res){
+           console.log(res); 
+        });
 
-        alert($scope.project.name);
-        console.log(this.project);
     };
 
     function getSelectedIndex(id) {

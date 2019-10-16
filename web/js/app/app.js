@@ -4,11 +4,17 @@
     angular
             .module('app', ['ngRoute', 'ngCookies'])
             .config(config)
-            .factory('httpRequestInterceptor', function () {
+            .factory('httpRequestInterceptor', function ($rootScope) {
                 return {
                     request: function (config) {
+                        
+                        if($rootScope.globals.currentUser){
+                            config.headers['Authorization'] = 'bearer ' + $rootScope.globals.currentUser.authdata;
+                        }else{
+                            config.headers['Authorization'] = 'Basic ab076c21-5ae8-df48-56aa-60ae76e24c51';
+                        }
 
-                        config.headers['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiZmFyaWQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTcxMjAxNDI4LCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJqdGkiOiJjYzQ2YzFiMS05ZGE1LTQyNmMtYWI4OS0zMTRjZmM0Yjg3YzUiLCJjbGllbnRfaWQiOiJ0ZXN0and0Y2xpZW50aWQifQ.4dXbPniaLeXfJ6vx_maZ_7ml5qy1pPrzGLZjt9-t2ig';
+                        
                         config.headers['Accept'] = 'application/json;odata=verbose';
 
                         return config;
@@ -75,10 +81,9 @@
 
     run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
     function run($rootScope, $location, $cookies, $http) {
-//        $http.defaults.headers.common['Authorization'] = 'Basic 33f05894-af61-4130-9d18-7a34015ea2bf';
         $rootScope.globals = $cookies.getObject('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+            $http.defaults.headers.common['Authorization'] = 'bearer ' + $rootScope.globals.currentUser.authdata;
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {

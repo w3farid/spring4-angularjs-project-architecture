@@ -123,6 +123,8 @@ app.controller('ProjectController', function ($scope, $location, $http, $rootSco
         console.log(project);
         $http.post(API.BASE_URL+API.CREATE_PROJECT, project).then(function(res){
            console.log(res); 
+        }).catch(function(err){
+            console.error(err);
         });
 
     };

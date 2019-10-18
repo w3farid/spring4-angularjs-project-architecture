@@ -23,41 +23,32 @@
                 var response;
                 UserService.userLogin(username, password)
                     .then(function (res) { 
-                        if (res.outcome == 'success') {
+                        if (res.status == '200') {
                             response = res;
                         } else {
                             response = null;
                         }
-                        callback(res);
+                        callback(response);
                     });
             }, 1000);
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-
         }
 
         function SetCredentials(res) {
-            var authdata = res.data.data.access_token;
+            var authdata = res.data.access_token;
 
             $rootScope.globals = {
                 currentUser: {
-                    username: res.data.data.user.username,
-                    role: res.data.data.user.authorities[0].authority,
+                    username: res.config.params.username,
                     authdata: authdata
                 }
             };
 
             // set default auth header for http requests
-            $http.defaults.headers.common['Authorization'] = 'Bearer ' + authdata;
+            $http.defaults.headers.common.Authorization = 'bearer ' + authdata;
 
             // store user details in globals cookie that keeps user logged in for 1 week (or until they logout)
             var cookieExp = new Date();
-            cookieExp.setDate(cookieExp.getDate() + 7);
+            cookieExp.setDate(cookieExp.getDate() + 999);
             $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
         }
 

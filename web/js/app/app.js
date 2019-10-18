@@ -3,27 +3,7 @@
 
     angular
             .module('app', ['ngRoute', 'ngCookies'])
-            .config(config)
-            .factory('httpRequestInterceptor', function ($rootScope) {
-                return {
-                    request: function (config) {
-                        
-                        if($rootScope.globals.currentUser){
-                            config.headers['Authorization'] = 'bearer ' + $rootScope.globals.currentUser.authdata;
-                        }else{
-                            config.headers['Authorization'] = 'Basic ab076c21-5ae8-df48-56aa-60ae76e24c51';
-                        }
-
-                        
-                        config.headers['Accept'] = 'application/json;odata=verbose';
-
-                        return config;
-                    }
-                };
-            })
-            .config(function ($httpProvider) {
-                $httpProvider.interceptors.push('httpRequestInterceptor');
-            })
+            .config(config)            
             .run(run);
 
     config.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
@@ -74,16 +54,16 @@
 
                 .otherwise({redirectTo: '/login'});
         $locationProvider.html5Mode({
-                 enabled: false,
-                 requireBase: false
-          });
+            enabled: false,
+            requireBase: false
+        });
     }
 
     run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
     function run($rootScope, $location, $cookies, $http) {
         $rootScope.globals = $cookies.getObject('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'bearer ' + $rootScope.globals.currentUser.authdata;
+            $http.defaults.headers.common.Authorization = 'bearer ' + $rootScope.globals.currentUser.authdata;
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {

@@ -183,9 +183,9 @@ app.controller('IssueController', function ($scope, $location, $http, $rootScope
 function getAllUsers(UserService, $scope) {
     UserService.GetAll()
             .then(function (res) {
-                if (res.status == '200') {
-                    console.log(res.data);
-                    $scope.usersList = res.data;
+                console.log(res.data);
+                if (res.data.outcome == 'success') {
+                    $scope.usersList = res.data.data;
                 }
             }).catch(function (err) {
         console.log(err);

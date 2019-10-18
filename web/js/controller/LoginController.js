@@ -19,16 +19,16 @@
         function login() {
             vm.dataLoading = true;
             LoginService.Login(vm.username, vm.password, function (response) {
-                if (response.data.outcome == 'success') {
+                console.log(response);
+                if (response.status == '200') {
                     LoginService.SetCredentials(response);
                     $location.path('/');
                     vm.dataLoading = false;
                 }else {
                     vm.dataLoading = false;
                 }
-            });
-        }
-        ;
+            });           
+        };
     }
 
 })();

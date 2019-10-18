@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('app')
-        .factory('UserService', UserService);
+            .module('app')
+            .factory('UserService', UserService);
 
     UserService.$inject = ['$http'];
     function UserService($http) {
@@ -20,8 +20,8 @@
 
         return service;
 
-        function GetAll() {            
-            return $http.get('/api/users/showAll').then(handleSuccess, handleError('Error getting all users'));
+        function GetAll() {
+            return $http.get('http://localhost:8081/api/user/all').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
@@ -31,9 +31,21 @@
         function GetByUsername(username) {
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
-        
-        function userLogin(username, password) {            
-            return $http.post(baseURL+'/userLogin', JSON.stringify({username:username, password:password})).then(handleSuccess, handleError('Error getting user by username'));
+
+        function userLogin(username, password) {
+           return $http({
+                method: 'POST',
+                url: 'http://localhost:8081/oauth/token',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'authorization': 'Basic ' + btoa("testjwtclientid:XY7kmzoNzl100")                    
+                },
+                params:{
+                    'username':'farid',
+                    'password':'123',
+                    'grant_type':'password'
+                }
+            }).then( handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
@@ -50,7 +62,7 @@
 
         // private functions
 
-        function handleSuccess(response) {           
+        function handleSuccess(response) {
             return response;
         }
 
